@@ -46,20 +46,19 @@ def notes_to_tabs(note_events):
     for note in note_events:
         start_time, end_time, midi_pitch, confidence, _ = note
 
-        # Фильтры для чистоты
-        if confidence < 0.8:          # только уверенные ноты
+        if confidence < 0.3:
             continue
-        if end_time - start_time < 0.1:  # убираем артефакты короче 0.1 сек
+        if end_time - start_time < 0.05:
             continue
-        if midi_pitch < 40 or midi_pitch > 88:  # диапазон гитары
+        if midi_pitch < 40 or midi_pitch > 88:
             continue
 
-        pos = best_position(midi_pitch, prev_string)
+        pos = best_position(int(midi_pitch), prev_string)
         if pos:
             tabs.append({
                 "time": round(float(start_time), 2),
-                "string": pos["string"],
-                "fret": pos["fret"]
+                "string": int(pos["string"]),  # int() — вот фикс
+                "fret": int(pos["fret"])        # int() — вот фикс
             })
             prev_string = pos["string"]
 
