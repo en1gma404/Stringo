@@ -1,5 +1,20 @@
-venv/
+# Python
 __pycache__/
-.ipynb_checkpoints/
 *.pyc
+.venv/
+venv/
+*.egg-info/
 
+# Модель basic-pitch (тяжёлая)
+*.pb
+saved_model/
+
+# Аудио файлы
+*.mp3
+*.wav
+*.ogg
+*.flac
+
+# Временные файлы
+*.tmp
+.DS_Store
